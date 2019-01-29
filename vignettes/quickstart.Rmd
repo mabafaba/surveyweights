@@ -1,0 +1,135 @@
+---
+title: "Quickstart: Calculating Survey Weights"
+author: "Martin Barner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quickstart: Calculating Survey Weights}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# General workflow
+
+## Prerequisites; You need to have:
+- your data as a data.frame
+    - one column should uniquely specify the stratum of the record
+- your sampling frame as a data.frame
+    - one row per stratum
+    - one column with the stratum names (corresponding exactly to the values in the stratum name column in the data)
+    - one column with the corresponding population numbers
+
+```{r,include=F}
+library(surveyweights)
+# example data:
+mydata<-data.frame(somevar1=c(1:5),
+                   somevar2=c("one","more","test","variable",NA),
+                   strata_names=c("a","a","b","b","a"),
+                   cluster_names=c("x","y","z","z","y"))
+
+# example sampling frame:
+mysf<-data.frame(strata=c("a","b"),pops=c(100,1000))
+clustersf<-data.frame(strata=c("x","y","z"),pops=c(50,100,200))
+
+
+```
+
+### 1. Example data & sampling frame:
+Example data:
+```{r, eval=T}
+mydata
+```
+Example sampling frame:
+```{r, eval=T}
+mysf
+```
+Note that the values in  `mydata$strata_names` all appear exactly in `mysf$strata`.
+
+### Calculate weights
+First we generate a weighting function that matches our dataset and samplingframe. Then we use that function to calculate weights for our dataset and/or different subsets of it.
+
+#### Generate weight function
+To generate a weight function, we need to provide at least:
+
+- the sampling frame
+- which column in the data denote the stratum
+- which columns in the sampling frame are what
+
+So we can do:
+```{r, eval=T}
+myweighting<-weighting_fun_from_samplingframe(sampling.frame = mysf,
+                                            data.stratum.column = "strata_names",
+                                            sampling.frame.population.column = "pops",
+                                            sampling.frame.stratum.column = "strata")
+
+```
+  
+`weighting` are not the weights itself, but a _function to generate weights_.
+
+### Calculate weights:
+
+Now to get the actual weights:
+
+```{r,eval=T}
+myweighting(mydata)
+
+```
+
+This is useful because we can calculate weights for subsets on the fly:
+
+```{r}
+# remove NA records:
+mydata_subset<-mydata[!is.na(mydata$somevar2),]
+
+# there are now only 2 records in stratum "a":
+mydata_subset
+
+# so the weights are different:
+myweighting(mydata_subset)
+
+```
+
+
+## Combining multiple sampling frames
+
+Assume that in addition to the above, we have a second sampling frame with populations sizes for example for cluster inside the strata:
+```{r}
+
+clustersf
+```
+
+As above, we generate a weighting function for the cluster:
+
+```{r}
+myweighting_cluster<-weighting_fun_from_samplingframe(sampling.frame = clustersf,
+                                            data.stratum.column = "cluster_names",
+                                            sampling.frame.population.column = "pops",
+                                            sampling.frame.stratum.column = "strata")
+
+```
+
+The weights we get with `myweighting_cluster` are incorrect, because the cluster between strata are not proportional. We can combine the two weighting functions like this:
+```{r}
+
+myweighting_combined<-combine_weighting_functions(myweighting,
+                                                  myweighting_cluster)
+
+myweighting_combined(mydata)
+
+# in comparison: the cluster weights only:
+myweighting_cluster(mydata)
+
+# This of course still works for subsets:
+myweighting_cluster(mydata_subset)
+
+```
+
+
+
