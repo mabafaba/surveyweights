@@ -1,7 +1,7 @@
 #' Combine weight functions from two sampling frames
 #'
 #' With multi-stage sampling, it is sometimes necessary to combine the weights from two sampling frames (e.g. stratified cluster sampling).
-#' This function let's you create a new weight function from two existing weight functions created with \link{\code{load_samplingframe}}.
+#' This function let's you create a new weight function from two existing weight functions created with weighting_fun_from_samplingframe.R}.
 #' @param weights_function_1 The weight function from the _outer_ sampling frame (the 'larger' scale; Records in one group of the _outer_ sampling frame can belong to different strata in the _inner_ sampling frame.)
 #' @param weights_function_2 The weight function from the _inner_ sampling frame (the 'smaller' scale; Records in the same group of the _inner_ sampling frame must also belong to the same group in the _outer_ sampling frame.)
 #' @details The returned function combines two sets of weights so that
