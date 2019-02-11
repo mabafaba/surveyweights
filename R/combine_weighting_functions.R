@@ -1,13 +1,13 @@
 #' Combine weight functions from two sampling frames
 #'
 #' With multi-stage sampling, it is sometimes necessary to combine the weights from two sampling frames (e.g. stratified cluster sampling).
-#' This function let's you create a new weight function from two existing weight functions created with weighting_fun_from_samplingframe.R}.
+#' This function let's you create a new weight function from two existing weight functions created with weighting_fun_from_samplingframe().
 #' @param weights_function_1 The weight function from the _outer_ sampling frame (the 'larger' scale; Records in one group of the _outer_ sampling frame can belong to different strata in the _inner_ sampling frame.)
 #' @param weights_function_2 The weight function from the _inner_ sampling frame (the 'smaller' scale; Records in the same group of the _inner_ sampling frame must also belong to the same group in the _outer_ sampling frame.)
 #' @details The returned function combines two sets of weights so that
 #' - the sum of weights of each sampling frame's groups remain proportional to each other
 #' - the total sum of weights equals the number of rows in the input data frame
-#' @value returns a function that takes a dataframe as input and returns a vector of weights
+#' @return returns a function that takes a dataframe as input and returns a vector of weights
 #' @export
 combine_weighting_functions<-function(weights_function_1,weights_function_2){
   if(!is.function(weights_function_1)){stop("first input must be a function (see ?load_samplingframe)")}

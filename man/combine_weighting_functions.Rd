@@ -11,9 +11,13 @@ combine_weighting_functions(weights_function_1, weights_function_2)
 
 \item{weights_function_2}{The weight function from the \emph{inner} sampling frame (the 'smaller' scale; Records in the same group of the \emph{inner} sampling frame must also belong to the same group in the \emph{outer} sampling frame.)}
 }
+\value{
+returns a function that takes a dataframe as input and returns a vector of weights
+}
 \description{
 With multi-stage sampling, it is sometimes necessary to combine the weights from two sampling frames (e.g. stratified cluster sampling).
-This function let's you create a new weight function from two existing weight functions created with load_samplingframe}
+This function let's you create a new weight function from two existing weight functions created with weighting_fun_from_samplingframe().
+}
 \details{
 The returned function combines two sets of weights so that
 \itemize{

@@ -25,6 +25,19 @@ returns a new function that takes a data frame as input returns a vector of weig
 \description{
 creates a weighting function from a sampling frame
 }
-\seealso{
-\code{\link{load_data} (not implemented), \link{aggregate_count_weighted}}
+\examples{
+# laod data and sampling frames:
+mydata<-read.csv("mydata.csv")
+mysamplingframe<-read.csv("mysamplingframe.csv")
+# create weighting function:
+weighting<-weighting_fun_from_samplingframe(sampling.frame = mysamplingframe,
+                                 data.stratum.column = "strata_names",
+                                 sampling.frame.population.column = "pop",
+                                 sampling.frame.stratum.column = "strat_name")
+# use weighting function:
+mydata$weights<-weighting(mydata)
+
+# this also works on subsets of the data:
+mydata_subset<-mydata[1:100,]
+subset_weights<- weighting(mydata)
 }
