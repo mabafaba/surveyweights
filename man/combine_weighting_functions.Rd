@@ -13,7 +13,7 @@ combine_weighting_functions(weights_function_1, weights_function_2)
 }
 \description{
 With multi-stage sampling, it is sometimes necessary to combine the weights from two sampling frames (e.g. stratified cluster sampling).
-This function let's you create a new weight function from two existing weight functions created with \link{\code{load_samplingframe}}.
+This function let's you create a new weight function from two existing weight functions created with XX.
 }
 \details{
 The returned function combines two sets of weights so that
