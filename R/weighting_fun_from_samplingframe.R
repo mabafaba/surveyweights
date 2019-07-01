@@ -34,7 +34,7 @@ weighting_fun_from_samplingframe <- function(sampling.frame,
   # check input
 
   # load file (loading from csv depreciated; just renaming)
-  sampling.frame<-as.data.frame(samplingframe,stringsAsFactors = FALSE)
+  sampling.frame<-as.data.frame(sampling.frame,stringsAsFactors = FALSE)
   sf_raw<-sampling.frame
   if(any(duplicated(sf_raw[, sampling.frame.stratum.column]))){
     sf_raw<-sf_raw[!duplicated(sf_raw[sampling.frame.stratum.column]),]
