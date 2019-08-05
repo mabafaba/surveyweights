@@ -79,6 +79,13 @@ weighting_fun_from_samplingframe <- function(sampling.frame,
   # closure function that calculates weights on the fly
   # uses immutable data provided to load_samplingframe()
   weights_of<- function(df) {
+
+    if(!is.data.frame(df)){stop("df must be a data.frame")}
+
+    # in case of tibble.. just to be sure (as tibbles weren't originally accounted for)
+    df<-as.data.frame(df,stringsAsFactors = FALSE)
+    # factors scare me:
+    df<-lapply(df,function(x){if(is.factor(x)){return(as.character(x))};x}) %>% as.data.frame(stringsAsFactors=FALSE)
     # # insure stratum column exists in df:
     if (!all(data.stratum.column %in% names(df))){stop(paste0("data frame column '",data.stratum.column, "'not found."))}
 
