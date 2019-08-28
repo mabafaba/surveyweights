@@ -2,3 +2,4 @@
 
 export(combine_weighting_functions)
 export(weighting_fun_from_samplingframe)
+importFrom(magrittr,"%>%")

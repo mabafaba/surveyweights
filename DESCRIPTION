@@ -8,12 +8,11 @@ Description: Calculate survey weights from sampling frames and data "on the fly"
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Depends: 
-    magrittr
 Imports:
-    crayon
+    crayon,
+    magrittr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: 
     knitr,
     rmarkdown
