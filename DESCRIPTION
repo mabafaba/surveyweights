@@ -9,7 +9,8 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    magrittr,
+    magrittr
+Imports:
     crayon
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1

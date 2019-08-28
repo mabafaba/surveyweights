@@ -67,7 +67,7 @@ weighting_fun_from_samplingframe <- function(sampling.frame,
     is_data_in_sf<-unique(data[,data.stratum.column]) %in% sf_raw[,sampling.frame.stratum.column]
     if(any(!(is_data_in_sf))){
       warning(paste0("there are records that can not be found in the sampling frame:\n",
-                     cyan(paste0(data[is_data_in_sf,data.stratum.column] %>% unique,collapse="\n"))))
+                     crayon::cyan(paste0(data[is_data_in_sf,data.stratum.column] %>% unique,collapse="\n"))))
     }
   }
 
