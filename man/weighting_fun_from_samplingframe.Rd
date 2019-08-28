@@ -40,5 +40,4 @@ mydata$weights<-weighting(mydata)
 # this also works on subsets of the data:
 mydata_subset<-mydata[1:100,]
 subset_weights<- weighting(mydata)
-
 }

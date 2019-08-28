@@ -1,7 +1,7 @@
 Package: surveyweights
 Type: Package
 Title: Calculate weights from sampling frames
-Version: 0.1.0
+Version: 0.2.0
 Author: Martin Barner
 Maintainer: Martin Barner <martin.barner@impact-initiatives.org>
 Description: Calculate survey weights from sampling frames and data "on the fly", and allows you to combine weights of multiple sampling frames.
@@ -15,5 +15,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Suggests: 
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 VignetteBuilder: knitr
