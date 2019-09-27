@@ -7,6 +7,7 @@
 #' @param data optional but recommended: you can provide an example data frame of data supposed to match the sampling frame to check if the provided variable names match and whether all strata in the data appear in the sampling frame.
 #' @return returns a new function that takes a data frame as input returns a vector of weights corresponding to each row in the data frame.
 #' @examples
+
 #' # load data and sampling frames:
 #' mydata<-read.csv("mydata.csv")
 #' mysamplingframe<-read.csv("mysamplingframe.csv")
@@ -21,6 +22,9 @@
 #' # this also works on subsets of the data:
 #' mydata_subset<-mydata[1:100,]
 #' subset_weights<- weighting(mydata)
+#'
+#' @importFrom magrittr %>%
+#'
 #' @export
 weighting_fun_from_samplingframe <- function(sampling.frame,
                                              data.stratum.column,
@@ -71,7 +75,7 @@ weighting_fun_from_samplingframe <- function(sampling.frame,
     is_data_in_sf<-unique(data[,data.stratum.column]) %in% sf_raw[,sampling.frame.stratum.column]
     if(any(!(is_data_in_sf))){
       warning(paste0("there are records that can not be found in the sampling frame:\n",
-                     cyan(paste0(data[is_data_in_sf,data.stratum.column] %>% unique,collapse="\n"))))
+                     crayon::cyan(paste0(data[is_data_in_sf,data.stratum.column] %>% unique,collapse="\n"))))
     }
   }
 

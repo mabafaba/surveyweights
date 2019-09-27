@@ -29,9 +29,9 @@ stratify.count.sample<-function(data.strata,sf.strata){
   # throw error if data strata not found in sampling frame
 
   if(length(data.strata.not.in.sampleframe)!=0){
-    stop(paste0("problem with ", cat(bgYellow(red(" sampling frame "))),
+    stop(paste0("problem with ", cat(crayon::bgYellow(crayon::red(" sampling frame "))),
                 "in the data, we find the following strata names that don't exist in the sampling frame, or have no valid population numbers:\n",
-                cyan(paste0(names(data.strata.not.in.sampleframe),collapse="\n")))
+                crayon::cyan(paste0(names(data.strata.not.in.sampleframe),collapse="\n")))
     )
   }
   # return sample counts
