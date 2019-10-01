@@ -107,7 +107,7 @@ weighting_fun_from_samplingframe <- function(sampling.frame,
     # final test that mean of weights == 1
     # insure(that.all=mean(weights[df[[data.stratum.column]]]) %almost.equals% 1,
     #        err="Weighting calculation failed internally, this is our fault. Sorry! Contact the Reach Initiatives data unit to get this fixed!")
-    return(weights[df[[data.stratum.column]]])
+    return(as.numeric(weights[df[[data.stratum.column]]]))
 
 
   }
