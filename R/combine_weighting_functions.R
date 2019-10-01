@@ -34,7 +34,7 @@ combine_weighting_functions<-function(weights_function_1,weights_function_2){
     w2 <- weights_function_2(df)
     w_combined<-normW2byW1(w1,w2)
 
-    return(as.numeric(w_combined))
+    return(w_combined)
   }
 
   return(combined_fun)

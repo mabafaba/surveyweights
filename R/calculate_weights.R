@@ -14,7 +14,7 @@ stratify.weights<-function(pop_strata,sample_strata){
   sample_global<-sum(sample_strata)
   pop_global<-sum(pop_strata)
   weights = (pop_strata/pop_global) / (sample_strata/sample_global)
-  return(as.numeric(weights))
+  return(weights)
 
 }
 
